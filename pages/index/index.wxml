@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="image-container">
+    <image class="img" src="{{image_url}}" mode="widthFix" />
+    <view class="result-box" wx:if="{{result}}">
+      <view class="info">
+        <view class="info-title">性别</view>
+        <view class="info-detail">{{result.gender>50?'男':'女'}}</view>
+      </view>
+      <view class="info" wx:if="{{result.age}}">
+        <view class="info-title">年龄</view>
+        <view class="info-detail">{{result.age}}</view>
+      </view>
+      <view class="info" wx:if="{{result.beauty}}">
+        <view class="info-title">颜值</view>
+        <view class="info-detail">{{result.beauty}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="buttons">
+    <button open-type="share">分享</button>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">上传照片</button>
+  </view>
+  <!--
+    <button class="poster-button">我的颜值鉴定报告</button>
+  -->
+  
+</view>
+
+<view style='width:0px;height:0px;overflow:hidden;'>
+  <canvas canvas-id='canvas1' style="width:{{cwidth}}px;height:{{cheight}}px"></canvas>
+</view>
