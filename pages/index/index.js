@@ -1,13 +1,14 @@
 //index.js
 //获取应用实例
 const app = getApp();
+import Poster from "../../miniprogram_npm/wxa-plugin-canvas/poster/poster";
 
 Page({
   data: {
     image_url: '/images/custom_bg.jpg',
-    cwith: 0,
-    cheight: 0,
-    result:null
+    result:null,
+    posterConfig:null,
+    done:false
   },
   onLoad: function () {
 
@@ -92,5 +93,183 @@ Page({
       path: '/pages/index/index',
       imageUrl: this.data.imageUrl
     }
-  }
+  },
+  checkAuth:function(){
+    const that = this;
+    wx.getSetting({
+      success (res) {
+        console.log(res.authSetting)
+        console.log(res.authSetting["scope.writePhotosAlbum"])
+        if(res.authSetting["scope.writePhotosAlbum"]===undefined){
+          wx.authorize({
+            scope:'scope.writePhotosAlbum',
+            success:()=>{
+              that.onCreatePoster();
+            },
+            fail:()=>{
+              wx.showToast({
+                title:'保存失败,请检查相册权限',
+                icon:'none'
+              })
+            }
+          })
+        }else if(res.authSetting["scope.writePhotosAlbum"]===true){
+          that.onCreatePoster(); 
+        }else{
+          wx.openSetting();
+        }
+      }
+    })
+  },
+  onPosterSuccess:function(e){
+    console.log(e)
+    // wx.previewImage({
+    //   urls: [e.detail],
+    // })
+    wx.saveImageToPhotosAlbum({
+      filePath: e.detail,
+      success: (result) => {
+        wx.showToast({
+          title:'已保存至相册'
+        })
+      }
+    });
+      
+  },
+  onPosterFail:function(e){
+    console.log(e)
+  },
+  onCreatePoster:function() {
+    const that = this;
+    wx.showLoading({title:'生成中...'});
+    wx.getImageInfo({
+      src: that.data.image_url,
+      success: (res) => {
+        const { width, height } = res;
+        const ch = 710 * height / width;
+        const containerHeight = ch + 300;
+        const posterConfig = {
+          width: 750,
+          height: containerHeight,
+          backgroundColor: '#fff',
+          debug: false,
+          blocks:[{
+            x:20,
+            y:ch-140,
+            width:200,
+            height:155,
+            backgroundColor:"rgba(0,0,0,0.06)",
+            borderRadius:20,
+            zIndex:2
+          }],
+          texts: [
+            {
+              x: 40,
+              y: ch-120,
+              baseLine: 'top',
+              text: '性别',
+              fontSize: 28,
+              color: '#ffffff',
+              zIndex:3
+            },
+            {
+              x: 120,
+              y: ch-120,
+              baseLine: 'top',
+              text: that.data.result.gender>50?'男':'女',
+              fontSize: 28,
+              color: '#ffffff',
+              zIndex:2
+            },
+            {
+              x: 40,
+              y: ch-75,
+              baseLine: 'top',
+              text: '年龄',
+              fontSize: 28,
+              color: '#ffffff',
+              zIndex:2
+            },
+            {
+              x: 120,
+              y: ch-75,
+              baseLine: 'top',
+              text: that.data.result.age+'',
+              fontSize: 28,
+              color: '#ffffff',
+              zIndex:2
+            },
+            {
+              x: 40,
+              y: ch-30,
+              baseLine: 'top',
+              text: '颜值',
+              fontSize: 28,
+              color: '#ffffff',
+              zIndex:2
+            },
+            {
+              x: 120,
+              y: ch-35,
+              baseLine: 'top',
+              text: that.data.result.beauty+'',
+              fontSize: 44,
+              color: '#d4237a',
+              zIndex:2
+            },
+            {
+              x: 340,
+              y: ch+100,
+              baseLine: 'top',
+              text: '长按识别小程序码',
+              fontSize: 38,
+              color: '#080808',
+            },
+            {
+              x: 340,
+              y: ch+150,
+              baseLine: 'top',
+              text: '查看你的颜值鉴定报告',
+              fontSize: 28,
+              color: '#929292',
+            },
+          ],
+          images: [
+            {
+              width: 710,
+              height: ch,
+              x: 20,
+              y: 20,
+              url: that.data.image_url,
+              borderRadius:10,
+              zIndex:1
+            },
+            {
+              width: 200,
+              height: 200,
+              x: 92,
+              y: ch+50,
+              url: '/images/qrcode.png',
+            }
+          ]
+        }
+        that.setData({
+          done:false
+        },()=>{
+          that.setData({ posterConfig,done:true }, () => {
+            Poster.create();
+            wx.hideLoading();
+          });
+        })
+
+      },
+      fail: () => {
+        wx.hideLoading();
+        wx.showToast({
+          title:'生成失败',
+          icon:"none"
+        })
+      },
+    });
+  },
 })

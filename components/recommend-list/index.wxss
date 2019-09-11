@@ -1,0 +1,41 @@
+/* pages/recommend-list/index.wxss */
+
+.recommended-list {
+    padding: 10rpx;
+    border-top: 1px solid #ededed;
+}
+
+.recommended-list .recommended-title {
+    font-size: 26rpx;
+    color: #ff758c;
+}
+
+.recommended-list-item {
+    padding:  10rpx 0 ;
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.recommended-list-item .logo {
+    border-radius: 10rpx;
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+}
+.recommended-list-item .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+.info .info-item:first-child {
+    color: #363636;
+    font-size: 26rpx;
+    margin-bottom: 10rpx;
+}
+.recommended-list-item .info-item:nth-child(2) {
+    font-size: 24rpx;
+    color: #666666;
+}

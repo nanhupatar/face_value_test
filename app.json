@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/recommend/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -9,5 +10,39 @@
     "navigationBarTitleText": "颜值鉴定",
     "navigationBarTextStyle": "white"
   },
-  "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color":"#333333",
+    "selectedColor":"#2aa515",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "颜值鉴定",
+        "iconPath":"/images/home1.png",
+        "selectedIconPath":"/images/home.png"
+      },
+      {
+        "pagePath": "pages/recommend/index",
+        "text": "更多好玩",
+        "iconPath":"/images/fire1.png",
+        "selectedIconPath":"/images/fire.png"
+      }
+    ]
+  },
+  "usingComponents":{
+    "recommend":"./components/recommend-list/index",
+    "poster": "wxa-plugin-canvas/poster"
+  },
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList":[
+    "1109700712",
+    "1109700750",
+    "1109626609",
+    "1109802242",
+    "1109728401",
+    "1109621337",
+    "1109629143",
+    "1109626655"
+  ]
+  
 }

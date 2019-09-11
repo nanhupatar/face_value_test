@@ -42,6 +42,8 @@
 button {
   border: none;
   color: #ffffff;
+  height: 80rpx;
+  line-height: 80rpx;
 }
 
 button::after{
@@ -59,11 +61,11 @@ button::after{
 }
 
 .buttons button:nth-child(1){
-  background:	#339933;
+  background:	#2aa515;
 }
 
 .buttons button:nth-child(2) {
-  background:#0099CC;
+  background:#17abe3;
 }
 
 .poster-button {

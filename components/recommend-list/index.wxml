@@ -1,0 +1,14 @@
+<view class="recommended-list">
+    <view class='recommended-title'>🔥好玩推荐</view>
+    <block wx:for="{{appList}}" wx:key="{{item.appId}}">
+        <navigator class="" target="miniProgram" app-id="{{item.appId}}" open-type="navigate">
+            <view class="recommended-list-item">
+                <image class="logo" src="{{item.url}}" lazy-load="true" />
+                <view class="info">
+                    <text class="info-item">{{item.name}}</text>
+                    <text class="info-item">{{item.desc}}</text>
+                </view>
+            </view>
+        </navigator>
+    </block>
+</view>

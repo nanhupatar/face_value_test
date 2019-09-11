@@ -22,12 +22,6 @@
     <button open-type="share">分享</button>
     <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">上传照片</button>
   </view>
-  <!--
-    <button class="poster-button">我的颜值鉴定报告</button>
-  -->
-  
+  <button wx:if="{{result}}"  class="poster-button" bindtap="checkAuth">我的颜值鉴定报告</button>
 </view>
-
-<view style='width:0px;height:0px;overflow:hidden;'>
-  <canvas canvas-id='canvas1' style="width:{{cwidth}}px;height:{{cheight}}px"></canvas>
-</view>
+<poster wx:if="{{done}}" id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
