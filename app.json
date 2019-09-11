@@ -31,7 +31,8 @@
   },
   "usingComponents":{
     "recommend":"./components/recommend-list/index",
-    "poster": "wxa-plugin-canvas/poster"
+    "poster": "wxa-plugin-canvas/poster",
+    "footer": "./components/footer/index"
   },
   "sitemapLocation": "sitemap.json",
   "navigateToMiniProgramAppIdList":[

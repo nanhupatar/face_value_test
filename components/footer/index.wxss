@@ -1,1 +1,6 @@
-/* components/footer/index.wxss */
+.footer-container {
+    padding: 40rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #666666;
+}

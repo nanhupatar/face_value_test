@@ -23,5 +23,6 @@
     <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">上传照片</button>
   </view>
   <button wx:if="{{result}}"  class="poster-button" bindtap="checkAuth">我的颜值鉴定报告</button>
+  <footer></footer>
 </view>
 <poster wx:if="{{done}}" id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>

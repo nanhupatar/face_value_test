@@ -1,2 +1,1 @@
-<!--components/footer/index.wxml-->
-<text>components/footer/index.wxml</text>
+<view class="footer-container">-- 小程序由 爱钱的小胡 提供技术支持 --</view>
